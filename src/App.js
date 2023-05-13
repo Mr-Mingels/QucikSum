@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import React, { lazy, Suspense, useState  } from "react";
 
-function App() {
+const Main = lazy(() => import('./components/Main'));
+
+const App = () => {
+
+  const RedirectToHome = () => {
+    const navigate = useNavigate();
+    React.useEffect(() => {
+      navigate('/url-summarizer');
+    }, [navigate]);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <Suspense fallback={<div className='loadingScreen'></div>}>
+          <Routes>
+            <Route path="/url-summarizer" element={<Main />} />
+            <Route path="/content-summarizer" element={<Main />} />
+            <Route path='*' element={<RedirectToHome />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </div>  
   );
 }
 

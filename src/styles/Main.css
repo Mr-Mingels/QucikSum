@@ -1,0 +1,203 @@
+.mainWrapper {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.mainNavBarWrapper {
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.mainNavBarContent {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    width: 100%;
+}
+
+.mainNavStartWrapper {
+    display: flex;
+    gap: 16px;
+}
+
+.mainImg {
+    height: 40px;
+    width: 40px;
+}
+
+.mainNavTitle {
+    font-weight: bolder;
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mainNavLinkWrapper {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+}
+
+.mainNavLink {
+    position: relative;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    overflow: hidden;
+    user-select: none;
+}
+
+.mainNavLink::after {
+    content: attr(data-content);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out; /* Transition only the opacity property */
+    pointer-events: none;
+}
+
+.mainNavLink:hover::after {
+    opacity: 1;
+}
+
+.mainContent {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+}
+
+.mainTagLine {
+    width: 450px;
+    font-weight: 800;
+    font-size: 42px;
+}   
+
+.highLightedTxt {
+    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mainDescriptionParagraph {
+    width: 600px;
+    line-height: 25px;
+}
+
+.mainInputWrapper {
+    position: relative;
+    width: 600px;
+}
+
+.mainInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid black;
+    border-color: transparent;
+    padding: 10px;
+    outline: none;
+    width: 600px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mainInput:focus {
+    border-color: black;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0);
+}
+
+.dropDownMenuBtn {
+    position: absolute;
+    border: none;
+    top: 0;
+    background-color: white;
+    right: 0;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropDownMenuBtn:hover::before {
+    position: absolute;
+    top: -40px;
+    content: 'Summarization Types';
+    width: 170px;
+    padding: 5px;
+    color: white;
+    border-radius: 8px;
+    background-color: rgb(30, 30, 30);
+}
+
+.dropDownImg {
+    width: 16px;
+    height: 16px;
+}
+
+.dropDownImg.open {
+    transform: rotate(180deg);
+}
+
+.summarizeBtn {
+    padding: 10px;
+    width: 150px;
+    margin-top: 34px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 20px;
+    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
+    cursor: pointer;
+}
+
+.mainDropDownMenu {
+    position: absolute;
+    top: 50px;
+    right: -50px;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    width: 150px;
+    padding: 10px;
+    border-radius: 8px;
+}   
+
+.mainDropDownMenuListWrapper {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mainDropDownMenuListItem {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.mainDropDownMenuListItem:hover {
+    background-color: rgb(60, 60, 60);
+    border-radius: 4px;
+}
+
+  
