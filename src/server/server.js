@@ -4,7 +4,8 @@ const path = require('path');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const axios = require('axios');
-const sanitizeHtml = require('sanitize-html');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
 
 dotenv.config();
 
@@ -12,41 +13,56 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const API_URL = 'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions';
+const API_URL = 'https://api.openai.com/v1/chat/completions';
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const extractContent = async (url) => {
-  const encodedParams = new URLSearchParams();
-  encodedParams.set('url', url);
-
-  const options = {
-    method: 'POST',
-    url: 'https://extract-content-from-url.p.rapidapi.com/api/url/extract/',
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-      'X-RapidAPI-Host': 'extract-content-from-url.p.rapidapi.com'
-    },
-    data: encodedParams,
-  };
-
   try {
-    const response = await axios.request(options);
-    return response.data;
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: 'networkidle2' });
+    const bodyHandle = await page.$('body');
+    const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    await bodyHandle.dispose();
+    await browser.close();
+
+    const $ = cheerio.load(html);
+
+    // Try multiple selectors
+    const selectors = ['article', 'main', '.post', '.entry-content', '#content', '.article-body'];
+    let mainContent = '';
+    
+    for (let selector of selectors) {
+      const content = $(selector).text();
+      if (content.length > mainContent.length) {
+        mainContent = content;
+      }
+    }
+    
+    return mainContent;
   } catch (error) {
     console.error(error);
+    throw new Error("Content extraction failed");
   }
-}
+};
+
 
 const getUrlSummary = async (text, summarizationType) => {
+  let instruction;
+  if (summarizationType === 'Default') {
+    instruction = 'Summarize the following text:';
+  } else {
+    instruction = `Summarize the following text in a ${summarizationType} style:`;
+  }
+  
   try {
-    const sanitizedText = sanitizeHtml(text);
     const response = await axios.post(API_URL, {
+      model: 'gpt-3.5-turbo',
       messages: [
         {role: 'system', content: 'You are a helpful assistant.'},
-        {role: 'user', content: `Summarize the following text:`},
-        {role: 'user', content: sanitizedText},
+        {role: 'user', content: instruction},
+        {role: 'user', content: text},
       ],
     }, {
       headers: {
@@ -54,8 +70,10 @@ const getUrlSummary = async (text, summarizationType) => {
         'Authorization': `Bearer ${process.env.OPENAI_KEY}`
       }
     });
-
-    return response.data.choices[0].text.trim();
+    if(!text) {
+      return 'invalid url'
+    }
+    return response.data.choices[0].message.content.trim();
   } catch (error) {
     console.error(error);
   }
@@ -63,7 +81,9 @@ const getUrlSummary = async (text, summarizationType) => {
 
 app.post('/summarize', async (req, res) => {
   const { url, summarizationType } = req.body;
+  console.log(url, summarizationType)
   const content = await extractContent(url);
+  console.log(content);
   const summary = await getUrlSummary(content, summarizationType);
   res.json({ summary });
 });

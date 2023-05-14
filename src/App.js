@@ -19,7 +19,6 @@ const App = () => {
         <Suspense fallback={<div className='loadingScreen'></div>}>
           <Routes>
             <Route path="/url-summarizer" element={<Main />} />
-            <Route path="/content-summarizer" element={<Main />} />
             <Route path='*' element={<RedirectToHome />} />
           </Routes>
         </Suspense>
