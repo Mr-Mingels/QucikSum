@@ -2,7 +2,6 @@ import React from "react";
 import Down from '../assets/down.png'
 import '../styles/Main.css'
 import { useState } from "react";
-import { useEffect } from "react";
 import axios from 'axios';
 
 const Main = () => {
@@ -39,7 +38,6 @@ const Main = () => {
         try {
           const response = await axios.post('http://localhost:3001/summarize', { url: input, summarizationType });
           setSummary(response.data.summary);
-          console.log('hello')
           setLoading(false)
           setTimeout(() => {
             setCanClick(true)
@@ -54,20 +52,11 @@ const Main = () => {
       };
     
     const handleSummaryType = (e) => {
-        console.log(e.target.innerHTML)
         setSummarizationType(e.target.innerHTML)
         setDropDownMenuOpen(false)
     }
 
-    useEffect(() => {
-        console.log(summary)
-        console.log(summarizationType)
-    },[summarizationType, summary])
 
-    useEffect(() => {
-        console.log(canClick)
-    },[canClick])
-   
     return (
         <section className="mainWrapper">
             <div className="mainContent">

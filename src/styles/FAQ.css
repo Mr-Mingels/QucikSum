@@ -73,7 +73,19 @@
 
 
 
-
+  @media screen and (min-width: 1536.1px) and (max-width: 100vw) {
+    .faqContent {
+        padding-left: calc(60px + (100vw - 1536px) / 25);
+        padding-right: calc(60px + (100vw - 1536px) / 25);
+    }
+    .faqBtnWrapper {
+        width: calc(800px + (100vw - 1536px) / 3);
+    }
+    .faqBtn {
+        padding-right: calc(30px + (100vw - 1536px) / 51.72);
+        padding-left: calc(30px + (100vw - 1536px) / 51.72);
+    }
+}
 
   @media (max-width: 1536px) {
     .faqContent {

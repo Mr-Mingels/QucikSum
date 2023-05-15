@@ -74,7 +74,16 @@
 
 
 @media screen and (min-width: 1536.1px) and (max-width: 100vw) {
-
+    .navImg {
+        width: calc(40px + (100vw - 1536px) / 150);
+        height: calc(40px + (100vw - 1536px) / 150);
+    }
+    .navTitle {
+        font-size: calc(28px + (100vw - 1536px) / 150);
+    }
+    .navLink {
+        font-size: calc(16px + (100vw - 1536px) / 300);
+    }
 }
 
 @media (max-width: 1536px) {
