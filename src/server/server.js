@@ -109,7 +109,7 @@ const chunkText = (text, size) => {
   return chunks;
 }
 
-app.post('/summarize', async (req, res) => {
+app.post('/api/summarize', async (req, res) => {
   const { url, summarizationType } = req.body;
   console.log(url, summarizationType)
   const content = await extractContent(url);

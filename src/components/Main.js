@@ -36,7 +36,7 @@ const Main = () => {
             return;
           }
         try {
-          const response = await axios.post('https://quick-sum.vercel.app/summarize', { url: input, summarizationType });
+          const response = await axios.post('https://quick-sum.vercel.app/api/summarize', { url: input, summarizationType });
           setSummary(response.data.summary);
           setLoading(false)
           setTimeout(() => {
