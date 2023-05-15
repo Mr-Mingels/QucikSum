@@ -50,7 +50,7 @@ const FAQ = () => {
          { question: `How long does it take for the summary to load?`, answer: <>The loading time for the summary is determined 
          by the amount of content present in the given URL. If the URL contains a substantial amount of content, it may take longer 
          for the summary to load completely. Conversely, if the content is relatively small or limited, the loading time will be shorter. 
-         The speed of loading is directly proportional to the volume of content being processed.</> },
+         The speed of loading is directly proportional to the volume of content being processed.</>},
       ];
 
     const handleQuestionClick = index => {

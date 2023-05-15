@@ -23,7 +23,7 @@ const Main = () => {
         setLoading(true)
         setCanClick(false)
         const input = document.querySelector('.mainInput').value;
-        const urlPattern = /^(http|https):\/\/[^ "]+$/; // Regex pattern for URLs
+        const urlPattern = /^(http|https):\/\/[^ "]+$/; 
         if (!input) {
             alert('Input field is empty');
             setCanClick(true)
