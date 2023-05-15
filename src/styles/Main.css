@@ -1,76 +1,6 @@
 .mainWrapper {
-    min-height: 100vh;
-    width: 100%;
-}
-
-.mainNavBarWrapper {
-    height: 80px;
-    width: 100%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-
-}
-
-.mainNavBarContent {
-    display: flex;
     height: 100%;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 32px;
     width: 100%;
-}
-
-.mainNavStartWrapper {
-    display: flex;
-    gap: 16px;
-}
-
-.mainImg {
-    height: 40px;
-    width: 40px;
-}
-
-.mainNavTitle {
-    font-weight: bolder;
-    font-size: 28px;
-    font-weight: 800;
-    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.mainNavLinkWrapper {
-    list-style: none;
-    display: flex;
-    gap: 16px;
-}
-
-.mainNavLink {
-    position: relative;
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 16px;
-    overflow: hidden;
-    user-select: none;
-}
-
-.mainNavLink::after {
-    content: attr(data-content);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out; /* Transition only the opacity property */
-    pointer-events: none;
-}
-
-.mainNavLink:hover::after {
-    opacity: 1;
 }
 
 .mainContent {
@@ -211,5 +141,124 @@
     background: linear-gradient(to right, #FBBF24, #FF9900, #FF6600);
     cursor: pointer;
 }
+
+.loadingSummaryWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 200px;
+}
+
+.mainLoader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FBBF24;
+    border-bottom-color: #FF9900;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+
+.articleSummaryWrapper {
+    margin-top: 32px;
+    width: 600px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.articleSummaryWrapper.empty {
+    display: none;
+}
+
+.renderedSummary {
+    height: fit-content;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 600px;
+}
+
+.summary {
+    font-weight: 500;
+    color: rgb(24, 24, 24);
+    line-height: 24px;
+    font-size: 14px;
+}
+
+.summary.bulletPoint {
+    display: flex;
+    text-align: start;
+}
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1536.1px) and (max-width: 100vw) {
+
+}
+
+@media (max-width: 1536px) {
+    .mainContent {
+        padding: calc(60px + (100vw - 1536px) / 35);
+    }
+    .mainTagLine {
+        font-size: calc(42px + (100vw - 1536px) / 250);
+    }
+    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary {
+        width: calc(600px + (100vw - 1536px) / 5);
+    }
+    .mainDescriptionParagraph {
+        font-size: calc(16px + (100vw - 1536px) / 500);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .mainContent {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: calc(30px + (100vw - 500px) / 10);
+        padding-right: calc(30px + (100vw - 500px) / 10);
+        gap: calc(32px + (100vw - 500px) / 25);
+    }
+    .mainTagLine {
+        font-size: calc(37.8px + (100vw - 500px) / 25);
+        width: calc(450px + (100vw - 500px) / 1.18);
+    }
+    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary {
+        width: calc(392.8px + (100vw - 500px) / 1.5);
+    }
+    .articleSummaryWrapper {
+        align-items: center;
+    }
+    .mainDescriptionParagraph {
+        font-size: calc(13.9px + (100vw - 500px) / 100);
+    }
+    .mainDropDownMenu {
+        right: calc(-50px - (100vw - 500px) / 6);
+    }
+    .dropDownMenuBtn:hover::before {
+        display: none;
+    }
+  }
 
   

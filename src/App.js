@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-ro
 import React, { lazy, Suspense, useState  } from "react";
 
 const Main = lazy(() => import('./components/Main'));
+const FAQ = lazy(() => import('./components/FAQ'));
+const NavBar = lazy(() => import('./components/NavBar'));
 
 const App = () => {
 
@@ -17,8 +19,10 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Suspense fallback={<div className='loadingScreen'></div>}>
+          <NavBar />
           <Routes>
             <Route path="/url-summarizer" element={<Main />} />
+            <Route path='/FAQ' element={<FAQ />} />
             <Route path='*' element={<RedirectToHome />} />
           </Routes>
         </Suspense>
