@@ -4,7 +4,6 @@ const path = require('path');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const axios = require('axios');
-const puppeteer = require('puppeteer');
 const chromeLambda = require('chrome-aws-lambda');
 const cheerio = require('cheerio');
 
