@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const axios = require('axios');
+const chromeLambda = require('chrome-aws-lambda');
 const cheerio = require('cheerio');
 
 dotenv.config();
@@ -20,8 +21,19 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const extractContent = async (url) => {
   try {
-    const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
+    const browser = await chromeLambda.puppeteer.launch({
+      args: chromeLambda.args,
+      executablePath: await chromeLambda.executablePath,
+      headless: chromeLambda.headless,
+    });
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: 'networkidle2' });
+    const bodyHandle = await page.$('body');
+    const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+    await bodyHandle.dispose();
+    await browser.close();
+
+    const $ = cheerio.load(html);
 
     // Try multiple selectors
     const selectors = ['article', 'main', '.post', '.entry-content', '#content', '.article-body'];
