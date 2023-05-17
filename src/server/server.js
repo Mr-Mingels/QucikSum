@@ -5,8 +5,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const axios = require('axios');
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer-core');
-const chrome = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer');
 
 
 dotenv.config();
@@ -21,16 +20,13 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const extractContent = async (url) => {
   try {
-    console.log('Chrome args:', chrome.args);
-    console.log('Chrome executablePath:', await chrome.executablePath);
-    console.log('Chrome headless:', chrome.headless);
-    const browser = await puppeteer.launch({
-      args: chrome.args,
-      executablePath: await chrome.executablePath,
-      headless: chrome.headless,
+    const browser = await puppeteer.connect({
+      browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_IO_KEY}`,
     });
+
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
+
     const bodyHandle = await page.$('body');
     const html = await page.evaluate(body => body.innerHTML, bodyHandle);
     await bodyHandle.dispose();
@@ -41,14 +37,14 @@ const extractContent = async (url) => {
     // Try multiple selectors
     const selectors = ['article', 'main', '.post', '.entry-content', '#content', '.article-body'];
     let mainContent = '';
-    
+
     for (let selector of selectors) {
       const content = $(selector).text();
       if (content.length > mainContent.length) {
         mainContent = content;
       }
     }
-    
+
     return mainContent;
   } catch (error) {
     console.error(error);
