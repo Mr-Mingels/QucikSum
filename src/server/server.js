@@ -13,7 +13,6 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const root = path.resolve();
 
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 const PORT = process.env.PORT || 3001;
@@ -135,8 +134,8 @@ app.post('/api/summarize', async (req, res) => {
 
   
 
-app.use(express.static(path.join(root, '../build')));
+app.use(express.static(path.join(__dirname, '../../build')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(root, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
