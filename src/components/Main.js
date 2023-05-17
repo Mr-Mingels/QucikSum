@@ -37,7 +37,7 @@ const Main = () => {
           }
           console.log("Sending request", { url: input, summarizationType });
         try {
-          const response = await axios.post('https://quicksum-production.up.railway.app/api/summarize', { url: input, summarizationType });
+          const response = await axios.post('http://localhost:3000/api/summarize', { url: input, summarizationType });
           console.log("Received response", response);
           setSummary(response.data.summary);
           setLoading(false)
