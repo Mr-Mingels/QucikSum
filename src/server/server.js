@@ -21,6 +21,9 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const extractContent = async (url) => {
   try {
+    console.log('Chrome args:', chrome.args);
+    console.log('Chrome executablePath:', await chrome.executablePath);
+    console.log('Chrome headless:', chrome.headless);
     const browser = await puppeteer.launch({
       args: chrome.args,
       executablePath: await chrome.executablePath,
