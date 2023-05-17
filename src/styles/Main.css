@@ -199,10 +199,6 @@
     color: rgb(24, 24, 24);
     line-height: 24px;
     font-size: 14px;
-}
-
-.summary.bulletPoint {
-    display: flex;
     text-align: start;
 }
 
@@ -235,7 +231,7 @@
     .mainTagLine {
         font-size: calc(42px + (100vw - 1536px) / 250);
     }
-    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary {
+    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary, .loadingSummaryWrapper {
         width: calc(600px + (100vw - 1536px) / 5);
     }
     .mainDescriptionParagraph {
@@ -255,8 +251,12 @@
         font-size: calc(37.8px + (100vw - 500px) / 25);
         width: calc(450px + (100vw - 500px) / 1.18);
     }
-    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary {
+    .mainDescriptionParagraph, .mainInput, .mainInputWrapper, .articleSummaryWrapper, .renderedSummary, .loadingSummaryWrapper {
         width: calc(392.8px + (100vw - 500px) / 1.5);
+    }
+    .mainInput {
+        box-shadow: unset;
+        border-color: rgb(0, 0, 0);
     }
     .articleSummaryWrapper {
         align-items: center;
