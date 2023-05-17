@@ -85,6 +85,7 @@ const getUrlSummary = async (text, summarizationType) => {
       });
       summaries.push(response.data.choices[0].message.content.trim());
     } catch (error) {
+      console.error("Error in getUrlSummary:", error);
       console.error(error);
       if (error.response && error.response.status === 429) {
         return 'Error: Rate limit exceeded, try again later.';
@@ -114,11 +115,14 @@ const chunkText = (text, size) => {
 }
 
 app.post('/api/summarize', async (req, res) => {
+  console.log("Received request", req.body);
   const { url, summarizationType } = req.body;
   console.log(url, summarizationType)
   const content = await extractContent(url);
+  console.log("Extracted content", content);
   console.log(content);
   let summary = await getUrlSummary(content, summarizationType);
+  console.log("Generated summary", summary);
   if (summarizationType === 'Bullet Point') {
     let isFirstMatch = true;
     summary = summary.replace(/- /g, (match) => {
@@ -131,6 +135,7 @@ app.post('/api/summarize', async (req, res) => {
     });
   }
   res.json({ summary });
+  console.log("Sent response", { summary })
 });
 
   

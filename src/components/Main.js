@@ -35,14 +35,17 @@ const Main = () => {
             setLoading(false)
             return;
           }
+          console.log("Sending request", { url: input, summarizationType });
         try {
           const response = await axios.post('https://quicksum-production.up.railway.app/api/summarize', { url: input, summarizationType });
+          console.log("Received response", response);
           setSummary(response.data.summary);
           setLoading(false)
           setTimeout(() => {
             setCanClick(true)
           }, 2000);
         } catch (error) {
+            console.error("Error in handleSummarizeClick:", error);
           console.error(error);
           setLoading(false)
           setTimeout(() => {
