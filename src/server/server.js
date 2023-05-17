@@ -13,8 +13,6 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const root = path.resolve();
-
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
@@ -140,9 +138,8 @@ app.post('/api/summarize', async (req, res) => {
 
   
 
-app.use(express.static(path.join(root, '../build')));
+app.use(express.static(path.join(__dirname, '../../build')));
 
 app.get('*', (req, res) => {
-  console.log(`Catch-all route triggered for ${req.method} ${req.originalUrl}`); // Add this
-  res.sendFile(path.join(root, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
