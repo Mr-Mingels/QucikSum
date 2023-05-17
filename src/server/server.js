@@ -5,7 +5,9 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const axios = require('axios');
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chrome = require('chrome-aws-lambda');
+
 
 dotenv.config();
 
@@ -19,7 +21,11 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const extractContent = async (url) => {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+    });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
     const bodyHandle = await page.$('body');
