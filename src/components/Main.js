@@ -45,7 +45,6 @@ const Main = () => {
             setCanClick(true)
           }, 2000);
         } catch (error) {
-            console.error("Error in handleSummarizeClick:", error);
           console.error(error);
           setLoading(false)
           setTimeout(() => {
