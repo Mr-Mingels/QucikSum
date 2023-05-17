@@ -143,5 +143,6 @@ app.post('/api/summarize', async (req, res) => {
 app.use(express.static(path.join(root, '../build')));
 
 app.get('*', (req, res) => {
+  console.log(`Catch-all route triggered for ${req.method} ${req.originalUrl}`); // Add this
   res.sendFile(path.join(root, '../build', 'index.html'));
 });
