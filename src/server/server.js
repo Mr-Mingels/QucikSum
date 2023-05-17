@@ -65,25 +65,23 @@ const getUrlSummary = async (text, summarizationType) => {
   
   const chunks = chunkText(text, CHUNK_SIZE);
 
-  let summaries = [];
-
-  for (let chunk of chunks) {
-    try {
-      const response = await axios.post(API_URL, {
-        model: 'gpt-3.5-turbo',
-        messages: [
-          {role: 'system', content: 'You are a helpful assistant.'},
-          {role: 'user', content: instruction},
-          {role: 'user', content: chunk},
-        ],
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENAI_KEY}`
-        }
-      });
-      summaries.push(response.data.choices[0].message.content.trim());
-    } catch (error) {
+  // Prepare all the requests but don't send them yet
+  const requests = chunks.map(chunk => 
+    axios.post(API_URL, {
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {role: 'system', content: 'You are a helpful assistant.'},
+        {role: 'user', content: instruction},
+        {role: 'user', content: chunk},
+      ],
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENAI_KEY}`
+      }
+    })
+    .then(response => response.data.choices[0].message.content.trim())
+    .catch(error => {
       console.error("Error in getUrlSummary:", error);
       console.error(error);
       if (error.response && error.response.status === 429) {
@@ -91,11 +89,15 @@ const getUrlSummary = async (text, summarizationType) => {
       } else {
         return 'Error: An unknown error occurred.';
       }
-    }
-  }
+    })
+  );
+
+  // Now send all the requests in parallel and wait for all of them to complete
+  const summaries = await Promise.all(requests);
 
   return summaries.join('\n'); // Join the summaries together
 }
+
 
 const chunkText = (text, size) => {
   var chunks = [];
