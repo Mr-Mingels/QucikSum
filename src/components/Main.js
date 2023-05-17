@@ -38,7 +38,6 @@ const Main = () => {
           console.log("Sending request", { url: input, summarizationType });
         try {
           const response = await axios.post('https://quicksum-production.up.railway.app/api/summarize', { url: input, summarizationType });
-          console.log("Received response", response);
           setSummary(response.data.summary);
           setLoading(false)
           setTimeout(() => {
@@ -94,8 +93,7 @@ const Main = () => {
                     <div className={`articleSummaryWrapper ${summary ? '' : 'empty'}`}>
                         <h2>Content <span className="highLightedTxt">Summary</span></h2>
                         <div className="renderedSummary">
-                            <p className={`summary ${summarizationType === 'Bullet Point' ? 'bulletPoint' : ''}`} 
-                            dangerouslySetInnerHTML={{ __html: summary }}></p>
+                            <p className="summary" dangerouslySetInnerHTML={{ __html: summary }}></p>
                         </div>
                     </div>
                 )}
