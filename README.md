@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+### **[Quick-Sum](https://quicksum-production.up.railway.app/)**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Project Introduction:**
 
-## Available Scripts
+Quick-Sum is a powerful and efficient full-stack application designed to transform the way you interact with digital content. Quick-Sum leverages cutting-edge technology to summarize articles and blog posts from any URL, making it easier than ever to extract the key points from an abundance of online content
 
-In the project directory, you can run:
+Powered by the highly advanced OpenAI API, Quick-Sum understands and condenses text intelligently, preserving the context and essence of the original source. It's perfect for students, researchers, professionals, or anyone needing a quick understanding of long and potentially overwhelming articles or blog posts
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **About The Project:**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![An image of the home screen of the Quick-Sum application](./public/images/quickSumScreenShot.png)
 
-### `npm test`
+Quick-Sum is a full-stack URL summarization application optimized for summarizing articles and blog posts
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+The common functionalities are:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The application accepts URLs of articles or blog posts to generate summaries. The URL should be valid and in the correct format
+- A drop-down menu is provided for users to select their desired summarization type
+- Quick-Sum provides three types of summarization: Default, Bullet Point, and Executive. These options cater to different user needs and preferences for content consumption
+- When the "Summarize" button is clicked, Quick-Sum will verify the input URL and summarization type before sending a request to an external API for summarization
+- The application incorporates error handling for common issues such as empty input field, invalid URL format, and issues with fetching the summarization
+- In the FAQ section, users can find answers to common questions. Each question can be clicked to expand and display the answer. This can help users understand how to use Quick-Sum effectively and troubleshoot common issues
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I'm using the [OpenAI API](https://openai.com/product) to get the summarization
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Credit: OPENAI API
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Built With:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React.js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Node.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Express js
 
-## Learn More
+- CSS3
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Cheerio
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Puppeteer
 
-### Code Splitting
+### **Key Concepts:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Web Scraping
 
-### Analyzing the Bundle Size
+- Text Chunking
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Cors
 
-### Making a Progressive Web App
+- Axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Path
 
-### Advanced Configuration
+- Responsive Web Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- API Consumption
 
-### Deployment
+- Component-based Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Summarization with AI
